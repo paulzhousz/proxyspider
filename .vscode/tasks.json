@@ -1,0 +1,11 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "0.1.0",
+    "command": "python",
+    "showOutput": "always",
+    "windows": {
+        "command": "d:/Python_Env/scrapytest/Scripts/python.exe"
+    },
+    "args": ["${file}"]
+}

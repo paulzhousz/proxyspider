@@ -15,6 +15,13 @@ SPIDER_MODULES = ['proxyspider.spiders']
 NEWSPIDER_MODULE = 'proxyspider.spiders'
 
 
+# MongoDB setting
+MONGODB_SERVER = "localhost"
+MONGODB_PORT = 27017
+MONGODB_DB = "resumespirit"
+MONGODB_COLLECTION = "proxyserver" 
+
+
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'proxyspider (+http://www.yourdomain.com)'
 
