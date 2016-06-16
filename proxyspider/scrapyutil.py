@@ -16,6 +16,7 @@ Update Log:
 """
 
 import random
+import urllib
 
 
 class RandomUserAgent(object):
@@ -68,9 +69,30 @@ class RandomUserAgent(object):
 
 class ProxyUtil(object):
     """
-        代理服务器相关工具类
+    代理服务器相关工具类
     """
-    pass
+    test_url = 'http://ip.chinaz.com/getip.aspx'
+
+    def is_valid_proxy(self, ip, port, user="user", password="passwd"):
+        """
+        检测代理服务ip是否有效，http://ip.chinaz.com/getip.aspx  作为检测目标
+        :param ip:代理服务器ip
+        :param port:代理服务器port
+        :param user:代理服务器用户名，默认=user
+        :param password:代理服务器密码，默认=passwd
+        :return:
+            True:有效代理
+            False:无效代理
+        """
+        try:
+            proxy_host = 'http://%s:%s@%s:%s' % (user, password, ip, port)
+            response = urllib.urlopen(self.test_url, proxies={"http": proxy_host})
+            if response.getcode() != 200:
+                return False
+            else:
+                return True
+        except Exception, e:
+            return False
 
 
 class MongoDBUtil(object):
