@@ -14,10 +14,26 @@ Update Log:
 =====================================================================
 """
 
-
 import scrapy
 from scrapy.spiders import CrawlSpider, Rule
+from scrapy.linkextractors import LinkExtractor
 
 
 class ProxySpider(CrawlSpider):
-    pass
+    name = 'xicidaili'
+    allowed_domains = 'www.xicidaili.com/'
+    start_urls = [
+        'http://www.xicidaili.com/nn/1',
+        # 'http://www.xicidaili.com/wn/1'
+    ]
+    rules = [
+        Rule(LinkExtractor(allow=(r'nn/\[1-9]')), callback='parse_Item', follow=False),
+        # Rule(LinkExtractor(allow=(r'wn/\d')),callback='parse_Item',follow=False)
+    ]
+
+    def parse_start_url(self, response):
+        print 'url=' + response.url
+
+    def parse_Item(self, response):
+        print 'url=' + response.url
+        # pass
