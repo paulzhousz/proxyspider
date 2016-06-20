@@ -73,7 +73,8 @@ class ProxyUtil(object):
     """
     test_url = 'http://ip.chinaz.com/getip.aspx'
 
-    def is_valid_proxy(self, ip, port, user="user", password="passwd"):
+    @classmethod
+    def is_valid_proxy(cls, ip, port, user="user", password="passwd"):
         """
         检测代理服务ip是否有效，http://ip.chinaz.com/getip.aspx  作为检测目标
         :param ip:代理服务器ip
@@ -86,7 +87,7 @@ class ProxyUtil(object):
         """
         try:
             proxy_host = 'http://%s:%s@%s:%s' % (user, password, ip, port)
-            response = urllib.urlopen(self.test_url, proxies={"http": proxy_host})
+            response = urllib.urlopen(cls().test_url, proxies={"http": proxy_host})
             if response.getcode() != 200:
                 return False
             else:

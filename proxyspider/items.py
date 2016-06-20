@@ -10,7 +10,7 @@
 import scrapy
 
 
-class ProxyspiderItem(scrapy.Item):
+class ProxyItem(scrapy.Item):
     # define the fields for your item here like:
     proxy_ip=scrapy.Field()
     Proxy_port=scrapy.Field()
