@@ -7,7 +7,8 @@
 # Created Time:2016-05-23 22：26
 # Update Log:
 #########################################################
+import argparse
 
 from scrapy import cmdline
 
-cmdline.execute("scrapy crawl xicidaili".split())
+cmdline.execute("scrapy crawl xici".split())

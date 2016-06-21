@@ -10,11 +10,11 @@
 import scrapy
 
 
-class ProxyItem(scrapy.Item):
+class ProxyServer(scrapy.Item):
     # define the fields for your item here like:
-    proxy_ip=scrapy.Field()
-    Proxy_port=scrapy.Field()
-    proxy_type=scrapy.Field()
-    proxy_location=scrapy.Field()
-    proxy_source=scrapy.Field()
-
+    proxy_ip = scrapy.Field()
+    Proxy_port = scrapy.Field()
+    proxy_type = scrapy.Field()
+    proxy_seq = scrapy.Field()
+    proxy_location = scrapy.Field()
+    proxy_source = scrapy.Field()

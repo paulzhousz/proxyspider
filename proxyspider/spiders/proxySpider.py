@@ -17,7 +17,7 @@ Update Log:
 import scrapy
 from scrapy.spiders import CrawlSpider, Rule
 from scrapy.linkextractors import LinkExtractor
-from proxyspider.items import ProxyItem
+from proxyspider.items import ProxyServer
 from proxyspider.scrapyutil import ProxyUtil
 
 
@@ -47,7 +47,7 @@ class ProxySpider(CrawlSpider):
             str_ip = tr.xpath('./td[2]/text()').extract()[0]
             str_port = tr.xpath('./td[3]/text()').extract()[0]
             if ProxyUtil.is_valid_proxy(str_ip, str_port):
-                item = ProxyItem()
+                item = ProxyServer()
                 item['proxy_ip'] = str_ip
                 item['Proxy_port'] = str_port
                 yield item

@@ -16,7 +16,7 @@ NEWSPIDER_MODULE = 'proxyspider.spiders'
 
 # MongoDB setting
 MONGO_URI = "mongodb://localhost:27017"
-MONGODB_DB = "resumespirit"
+MONGO_DATABASE = "resumespirit"
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 # USER_AGENT = 'proxyspider (+http://www.yourdomain.com)'
@@ -65,9 +65,9 @@ DOWNLOADER_MIDDLEWARES = {
 
 # Configure item pipelines
 # See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
-# ITEM_PIPELINES = {
-#    'proxyspider.pipelines.SomePipeline': 300,
-# }
+ITEM_PIPELINES = {
+   'proxyspider.pipelines.MongoPipeline': 200,
+}
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See http://doc.scrapy.org/en/latest/topics/autothrottle.html
