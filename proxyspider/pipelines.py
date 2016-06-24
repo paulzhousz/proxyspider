@@ -14,6 +14,7 @@ class MongoPipeline(object):
     def __init__(self, mongo_uri, mongo_db):
         self.mongo_uri = mongo_uri
         self.mongo_db = mongo_db
+        self.proxy_seq = 1
 
     @classmethod
     def from_crawler(cls, crawler):
@@ -25,14 +26,16 @@ class MongoPipeline(object):
     def open_spider(self, spider):
         self.client = pymongo.MongoClient(self.mongo_uri)
         self.db = self.client[self.mongo_db]
+        # c=ProxyServer.__name__
+        self.db.drop_collection(ProxyServer.__name__)
 
     def close_spider(self, spider):
         self.client.close()
 
     def process_item(self, item, spider):
-        proxy_seq = 1
         if isinstance(item, ProxyServer):
-            collection_name = item.__class__.__name__
-            item['proxy_seq']
+            collection_name = ProxyServer.__name__
+            item['proxy_seq'] = self.proxy_seq
+            self.proxy_seq += 1
             self.db[collection_name].insert(dict(item))
             return item

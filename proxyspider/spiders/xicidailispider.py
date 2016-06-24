@@ -16,7 +16,7 @@ from scrapy import Spider
 from proxyspider.items import ProxyServer
 
 
-class XiciDailiProxy(Spider):
+class XiciDailiSpider(Spider):
     name = 'xici'
     allowed_domains = ['xicidaili.com']
     page_start = 1
