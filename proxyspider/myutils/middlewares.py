@@ -2,7 +2,7 @@
 # -*- coding:utf-8 -*-
 # ====================================================================
 # Project: 'proxyspider'
-# File: 'RandomUserAgent.py'
+# File: 'middlewares.py'
 # Description:
 #    使用列表中的user agent设置scrapy middleware
 # Author: Paul Zhou(paulzhousz@gmail.com)

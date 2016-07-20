@@ -39,4 +39,7 @@ class DBUtil(object):
                                     'Proxy_port': proxy_port},
                                 {'$set': {'proxy_seq': proxy_seq}})
             proxy_seq += 1
+        self.closedb()
+
+    def closedb(self):
         self.client.close()

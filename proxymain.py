@@ -7,12 +7,14 @@
 # Created Time:2016-05-23 22：26
 # Update Log:
 #########################################################
+
 import argparse
 
 from scrapy.crawler import CrawlerProcess
 from scrapy.utils.project import get_project_settings
 
 from proxyspider.spiders.xicidailispider import XiciDailiSpider
+from proxyspider.myutils.ProxyUtil import DetectManager
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='crawl proxy server from http://www.xicidaili.com')
@@ -20,7 +22,8 @@ if __name__ == '__main__':
                         type=int)
     parser.add_argument("-t", "-test", help="check proxy is available. command : python main.y -t db", )
     args = parser.parse_args()
-    if args.c is not None:
+    # 抓取proxy ip
+    if args.c is not None and len(args.c)>1:
         if len(args.c) > 1 and args.c[0] < args.c[1]:
             print ('crawl proxy start...')
             XiciDailiSpider.page_start = args.c[0]
@@ -31,7 +34,16 @@ if __name__ == '__main__':
         else:
             print ('invalid parameter!')
 
+    # 检测proxy ip的有效性
+    if args.t is not None:
+        print ('proxy detect start...')
+        detecter=DetectManager(5)
+        detecter.start()
+        print ('detect end.')
 
-# from scrapy import cmdline
-#
-# cmdline.execute("scrapy crawl xici".split())
+"""
+from scrapy import cmdline
+
+cmdline.execute("scrapy crawl xici".split())
+"""
+
