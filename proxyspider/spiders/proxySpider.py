@@ -49,7 +49,7 @@ class ProxySpider(CrawlSpider):
             if ProxyUtil.is_valid_proxy(str_ip, str_port):
                 item = ProxyServer()
                 item['proxy_ip'] = str_ip
-                item['Proxy_port'] = str_port
+                item['proxy_port'] = str_port
                 yield item
             else:
                 print ('Bad proxy:%s--%s' % (str_ip, str_port))

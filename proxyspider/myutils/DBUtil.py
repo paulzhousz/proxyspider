@@ -24,6 +24,9 @@ class DBUtil(object):
         self.db = self.client[MONGO_DATABASE]
         self.proxies = self.db[ProxyServer.__name__]
 
+    def deleteproxy(self,condition):
+        self.proxies.remove(condition)
+
     def update_seq(self):
         """
         更新proxy sequence ID
@@ -33,10 +36,10 @@ class DBUtil(object):
         proxylist = self.proxies.find()
         for proxy in proxylist:
             proxy_ip = proxy['proxy_ip']
-            proxy_port = proxy['Proxy_port']
+            proxy_port = proxy['proxy_port']
             self.proxies.update({
                                     'proxy_ip': proxy_ip,
-                                    'Proxy_port': proxy_port},
+                                    'proxy_port': proxy_port},
                                 {'$set': {'proxy_seq': proxy_seq}})
             proxy_seq += 1
         self.closedb()

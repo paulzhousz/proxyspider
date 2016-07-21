@@ -40,7 +40,7 @@ class XiciDailiSpider(Spider):
             str_port = tr.xpath('./td[3]/text()').extract()[0]
             item = ProxyServer()
             item['proxy_ip'] = str_ip
-            item['Proxy_port'] = str_port
+            item['proxy_port'] = str_port
             yield item
 
 

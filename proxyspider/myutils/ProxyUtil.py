@@ -19,7 +19,6 @@ from threading import Thread
 from .DBUtil import DBUtil
 
 
-
 class DetectProxy(Thread):
     '''
     检测代理的可用性
@@ -59,16 +58,21 @@ class DetectProxy(Thread):
 
         for proxy in part_proxies:
             proxy_ip = proxy["proxy_ip"]
-            proxy_port = proxy["Proxy_port"]
+            proxy_port = proxy["proxy_port"]
+            proxy_seq = proxy["proxy_seq"]
 
             try:
-                proxy_host = "http://user:pwd@" + proxy_ip + ":" + proxy_port
+                proxy_host = "http://anonymous:pwd@" + proxy_ip + ":" + proxy_port
                 response = urllib.urlopen(self.url, proxies={"http": proxy_host})
 
                 if response.getcode() != 200:
-                    self.dbutil.proxies.remove({'proxy_ip': proxy_ip, 'proxy_port': proxy_port})
+                    self.dbutil.deleteproxy({'proxy_ip': proxy_ip, 'proxy_port': proxy_port})
+                    print(proxy_host, 'bad proxy',proxy_seq)
+                else:
+                    print(proxy_host, 'good proxy',proxy_seq)
             except Exception, e:
-                self.dbutil.proxies.remove({'proxy_ip': proxy_ip, 'proxy_port': proxy_port})
+                self.dbutil.deleteproxy({'proxy_ip': proxy_ip, 'proxy_port': proxy_port})
+                print(proxy_host, 'bad proxy', proxy_seq)
                 continue
 
 
@@ -101,4 +105,6 @@ class DetectManager(Thread):
                     now += 1
             time.sleep(0.1)
 
-        self.dbutil.update_seq()
+        # self.dbutil.update_seq()
+
+
